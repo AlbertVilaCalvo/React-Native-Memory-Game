@@ -18,8 +18,8 @@ import {
   useColorScheme,
   View,
 } from 'react-native'
-
 import { Colors } from 'react-native/Libraries/NewAppScreen'
+import { Board } from './src/component/Board'
 
 const Section: React.FC<{
   title: string
@@ -59,18 +59,8 @@ const App = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-        </View>
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <Board />
       </ScrollView>
     </SafeAreaView>
   )
