@@ -1,7 +1,7 @@
 import { CardType } from './CardType'
 import { CardState } from './CardState'
 import { Game } from './Game'
-import { makeAutoObservable, runInAction } from 'mobx'
+import { action, makeObservable, observable, runInAction } from 'mobx'
 
 const BACKGROUND_COLOR_INVISIBLE = '#3d5161'
 const BACKGROUND_COLOR_VISIBLE = '#02b3e4'
@@ -14,10 +14,11 @@ export class Card {
   game: Game
 
   constructor(type: CardType, game: Game) {
-    makeAutoObservable(this, {
-      type: false,
-      game: false,
-      backgroundColor: false,
+    makeObservable(this, {
+      state: observable,
+      makeVisible: action,
+      makeMatched: action,
+      hide: action,
     })
     this.type = type
     this.game = game

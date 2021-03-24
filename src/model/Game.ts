@@ -1,4 +1,4 @@
-import { autorun, makeAutoObservable } from 'mobx'
+import { action, autorun, computed, makeObservable, observable } from 'mobx'
 import { generateInitialCards } from './generateInitialCards'
 import { Card } from './Card'
 
@@ -7,8 +7,13 @@ export class Game {
   clicks = 0
 
   constructor() {
-    makeAutoObservable(this, {
-      visibleCards: false,
+    makeObservable(this, {
+      cards: observable,
+      clicks: observable,
+      startGame: action,
+      onClick: action,
+      moves: computed,
+      isCompleted: computed,
     })
   }
 
