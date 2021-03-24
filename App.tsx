@@ -37,19 +37,20 @@ const App = observer(() => {
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Text style={styles.moves}>{game.moves} moves</Text>
+        <Text style={styles.text}>{game.moves} moves</Text>
         <Board cards={game.cards} />
+        {game.isCompleted && <Text style={styles.text}>Congratulations!</Text>}
       </ScrollView>
     </SafeAreaView>
   )
 })
 
 const styles = StyleSheet.create({
-  moves: {
+  text: {
     fontSize: 22,
-    marginVertical: 16,
-    marginHorizontal: 16,
     fontWeight: '600',
+    marginHorizontal: 16,
+    marginVertical: 16,
   },
 })
 

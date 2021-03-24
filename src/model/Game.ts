@@ -43,8 +43,12 @@ export class Game {
     }
   }
 
-  get moves() {
+  get moves(): number {
     return Math.floor(this.clicks / 2)
+  }
+
+  get isCompleted(): boolean {
+    return this.cards.every((card) => card.isMatched)
   }
 
   // helpers
