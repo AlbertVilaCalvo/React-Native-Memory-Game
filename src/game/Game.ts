@@ -20,6 +20,7 @@ export class Game {
   startGame() {
     console.log('startGame()')
     this.cards = generateInitialCards()
+    this.clicks = 0
   }
 
   onClick(card: Card) {

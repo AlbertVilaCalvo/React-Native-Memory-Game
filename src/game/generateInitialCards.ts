@@ -10,8 +10,6 @@ for (const cardType in CardType) {
   cardTypes.push(aCardType)
 }
 
-const cards: Card[] = cardTypes.map((cardType) => new Card(cardType, game))
-
 // https://stackoverflow.com/a/12646864/4034572
 function shuffleArray<T>(array: T[]): T[] {
   const copy = [...array]
@@ -23,5 +21,6 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export function generateInitialCards(): Card[] {
+  const cards: Card[] = cardTypes.map((cardType) => new Card(cardType, game))
   return shuffleArray(cards)
 }

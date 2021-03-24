@@ -10,12 +10,14 @@
 
 import React from 'react'
 import {
+  Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
+  View,
 } from 'react-native'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 import { Board } from './src/component/Board'
@@ -37,7 +39,15 @@ const App = observer(() => {
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Text style={styles.text}>{game.moves} moves</Text>
+        <View style={styles.row}>
+          <Text style={styles.text}>{game.moves} moves</Text>
+          <Pressable
+            onPress={() => {
+              game.startGame()
+            }}>
+            <Text style={styles.text}>Restart</Text>
+          </Pressable>
+        </View>
         <Board cards={game.cards} />
         {game.isCompleted && <Text style={styles.text}>Congratulations!</Text>}
       </ScrollView>
@@ -46,6 +56,9 @@ const App = observer(() => {
 })
 
 const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+  },
   text: {
     fontSize: 22,
     fontWeight: '600',
