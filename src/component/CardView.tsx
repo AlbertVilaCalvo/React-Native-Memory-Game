@@ -12,19 +12,19 @@ interface CardViewProps {
 export const CardView = observer(
   ({ card, cardSize, gapSize }: CardViewProps) => {
     return (
-      <View
+      <Pressable
         style={[
           styles.container,
           { width: cardSize, height: cardSize, margin: gapSize },
-        ]}>
-        <Pressable
-          onPress={() => {
-            card.makeVisible()
-          }}>
+        ]}
+        onPress={() => {
+          card.makeVisible()
+        }}>
+        <View>
           <Text>{card.type}</Text>
           <Text>isVisible: {card.isVisible.toString()}</Text>
-        </Pressable>
-      </View>
+        </View>
+      </Pressable>
     )
   },
 )
