@@ -1,8 +1,9 @@
 import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, View } from 'react-native'
 import { Card } from '../model/Card'
 import { observer } from 'mobx-react-lite'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { CardState } from '../model/CardState'
 
 interface CardViewProps {
   card: Card
@@ -16,15 +17,19 @@ export const CardView = observer(
       <Pressable
         style={[
           styles.container,
-          { width: cardSize, height: cardSize, margin: gapSize },
+          {
+            width: cardSize,
+            height: cardSize,
+            margin: gapSize,
+            backgroundColor: card.backgroundColor,
+          },
         ]}
         onPress={() => {
-          card.makeVisible()
+          card.onClick()
         }}>
-        {card.isVisible && (
+        {card.state !== CardState.Invisible && (
           <View style={styles.center}>
             <Icon name={card.type} size={30} color="#fff" />
-            <Text>{card.type}</Text>
           </View>
         )}
       </Pressable>
@@ -34,8 +39,6 @@ export const CardView = observer(
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#02ccba',
-    borderWidth: 1,
     borderRadius: 8,
     borderColor: 'blue',
     padding: 10,
