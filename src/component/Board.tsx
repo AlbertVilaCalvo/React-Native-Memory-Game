@@ -1,20 +1,9 @@
 import React from 'react'
 import { StyleSheet, useWindowDimensions, View } from 'react-native'
-import { Card } from '../model/Card'
 import { CardView } from './CardView'
-import { CardType } from '../model/CardType'
+import { Card } from '../model/Card'
 
-const cardTypes: CardType[] = []
-for (const cardType in CardType) {
-  // https://stackoverflow.com/a/58509049/4034572
-  const aCardType: CardType = CardType[cardType as keyof typeof CardType]
-  cardTypes.push(aCardType)
-  cardTypes.push(aCardType)
-}
-
-const cards: Card[] = cardTypes.map((cardType) => new Card(cardType))
-
-export function Board() {
+export function Board({ cards }: { cards: Card[] }) {
   const { boardSize, cardSize } = useCardSize()
 
   return (

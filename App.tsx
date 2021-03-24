@@ -20,6 +20,8 @@ import {
 } from 'react-native'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 import { Board } from './src/component/Board'
+import { game } from './src/model/Game'
+import { observer } from 'mobx-react-lite'
 
 const Section: React.FC<{
   title: string
@@ -49,22 +51,27 @@ const Section: React.FC<{
   )
 }
 
-const App = () => {
+const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark'
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   }
 
+  React.useEffect(() => {
+    game.startGame()
+  }, [])
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Board />
+        <Text>{game.moves}</Text>
+        <Board cards={game.cards} />
       </ScrollView>
     </SafeAreaView>
   )
-}
+})
 
 const styles = StyleSheet.create({
   sectionContainer: {
