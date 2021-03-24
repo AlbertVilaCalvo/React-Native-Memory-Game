@@ -31,6 +31,14 @@ export class Card {
     }
   }
 
+  makeVisible() {
+    this.state = CardState.Visible
+  }
+
+  makeMatched() {
+    this.state = CardState.Matched
+  }
+
   hide() {
     this.state = CardState.NotMatched
     setTimeout(() => {
@@ -38,6 +46,26 @@ export class Card {
         this.state = CardState.Invisible
       })
     }, 1000)
+  }
+
+  matches(card: Card): boolean {
+    return card.type === this.type
+  }
+
+  get isInvisible(): boolean {
+    return this.state === CardState.Invisible
+  }
+
+  get isVisible(): boolean {
+    return this.state === CardState.Visible
+  }
+
+  get isMatched(): boolean {
+    return this.state === CardState.Matched
+  }
+
+  get isNotMatched(): boolean {
+    return this.state === CardState.NotMatched
   }
 
   get backgroundColor(): string {

@@ -3,7 +3,6 @@ import { Pressable, StyleSheet, View } from 'react-native'
 import { Card } from '../model/Card'
 import { observer } from 'mobx-react-lite'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { CardState } from '../model/CardState'
 
 interface CardViewProps {
   card: Card
@@ -27,7 +26,7 @@ export const CardView = observer(
         onPress={() => {
           card.onClick()
         }}>
-        {card.state !== CardState.Invisible && (
+        {!card.isInvisible && (
           <View style={styles.center}>
             <Icon name={card.type} size={30} color="#fff" />
           </View>

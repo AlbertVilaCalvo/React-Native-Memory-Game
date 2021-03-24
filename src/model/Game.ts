@@ -1,7 +1,6 @@
 import { autorun, makeAutoObservable } from 'mobx'
 import { generateInitialCards } from './generateInitialCards'
 import { Card } from './Card'
-import { CardState } from './CardState'
 
 export class Game {
   cards: Card[] = []
@@ -24,7 +23,7 @@ export class Game {
       return
     }
     this.clicks++
-    card.state = CardState.Visible
+    card.makeVisible()
     this.evaluateMatch()
   }
 
@@ -34,9 +33,9 @@ export class Game {
     if (visibleCards.length !== 2) {
       return
     }
-    if (visibleCards[0].type === visibleCards[1].type) {
-      visibleCards[0].state = CardState.Matched
-      visibleCards[1].state = CardState.Matched
+    if (visibleCards[0].matches(visibleCards[1])) {
+      visibleCards[0].makeMatched()
+      visibleCards[1].makeMatched()
     } else {
       visibleCards[0].hide()
       visibleCards[1].hide()
@@ -54,11 +53,11 @@ export class Game {
   // helpers
 
   notMatchedCards(): Card[] {
-    return this.cards.filter((card) => card.state === CardState.NotMatched)
+    return this.cards.filter((card) => card.isNotMatched)
   }
 
   visibleCards(): Card[] {
-    return this.cards.filter((card) => card.state === CardState.Visible)
+    return this.cards.filter((card) => card.isVisible)
   }
 }
 
