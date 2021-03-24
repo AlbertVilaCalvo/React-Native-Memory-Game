@@ -19,7 +19,7 @@ import {
 } from 'react-native'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 import { Board } from './src/component/Board'
-import { game } from './src/model/Game'
+import { game } from './src/game/Game'
 import { observer } from 'mobx-react-lite'
 
 const App = observer(() => {

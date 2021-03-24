@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, useWindowDimensions, View } from 'react-native'
 import { CardView } from './CardView'
-import { Card } from '../model/Card'
+import { Card } from '../game/Card'
 
 export function Board({ cards }: { cards: Card[] }) {
   const { boardSize, cardSize } = useCardSize()

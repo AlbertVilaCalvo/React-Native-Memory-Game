@@ -1,6 +1,6 @@
 import React from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
-import { Card } from '../model/Card'
+import { Card } from '../game/Card'
 import { observer } from 'mobx-react-lite'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
