@@ -41,6 +41,7 @@ const App = observer(() => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={styles.row}>
           <Text style={styles.text}>{game.moves} moves</Text>
+          <Text style={styles.text}>{game.timer.seconds} seconds</Text>
           <Pressable
             onPress={() => {
               game.startGame()

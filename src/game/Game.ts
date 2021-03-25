@@ -1,10 +1,12 @@
 import { action, autorun, computed, makeObservable, observable } from 'mobx'
 import { generateInitialCards } from './generateInitialCards'
 import { Card } from './Card'
+import { Timer } from './Timer'
 
 export class Game {
   cards: Card[] = []
   clicks = 0
+  timer = new Timer()
 
   constructor() {
     makeObservable(this, {
@@ -21,11 +23,16 @@ export class Game {
     console.log('startGame()')
     this.cards = generateInitialCards()
     this.clicks = 0
+    this.timer.reset()
   }
 
   onClick(card: Card) {
     console.log('onClick() card', card.type)
+    if (!this.timer.isStarted) {
+      this.timer.start()
+    }
     if (this.notMatchedCards().length > 0) {
+      // Ignore clicks while cards are not matched (ie red)
       return
     }
     this.clicks++
@@ -42,6 +49,9 @@ export class Game {
     if (visibleCards[0].matches(visibleCards[1])) {
       visibleCards[0].makeMatched()
       visibleCards[1].makeMatched()
+      if (this.isCompleted) {
+        this.timer.stop()
+      }
     } else {
       visibleCards[0].hide()
       visibleCards[1].hide()
