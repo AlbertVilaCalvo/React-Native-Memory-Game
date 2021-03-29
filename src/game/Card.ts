@@ -2,6 +2,7 @@ import { CardType } from './CardType'
 import { CardState } from './CardState'
 import { Game } from './Game'
 import { action, makeObservable, observable, runInAction } from 'mobx'
+import { NO_MATCH_ANIMATION_DURATION } from '../component/CardView'
 
 const BACKGROUND_COLOR_INVISIBLE = '#3d5161'
 const BACKGROUND_COLOR_VISIBLE = '#02b3e4'
@@ -46,7 +47,7 @@ export class Card {
       runInAction(() => {
         this.state = CardState.Invisible
       })
-    }, 1000)
+    }, NO_MATCH_ANIMATION_DURATION)
   }
 
   matches(card: Card): boolean {
