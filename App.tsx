@@ -12,7 +12,6 @@ import React from 'react'
 import {
   Pressable,
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -23,6 +22,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen'
 import { Board } from './src/component/Board'
 import { game } from './src/game/Game'
 import { observer } from 'mobx-react-lite'
+import { WinOverlay } from './src/component/WinOverlay'
 
 const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark'
@@ -36,9 +36,10 @@ const App = observer(() => {
   }, [])
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView style={[styles.container, backgroundStyle]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <View style={styles.container}>
+        <WinOverlay show={game.isCompleted} onClose={() => game.startGame()} />
         <View style={styles.row}>
           <Text style={styles.text}>{game.moves} moves</Text>
           <Text style={styles.text}>{game.timer.seconds} seconds</Text>
@@ -50,13 +51,15 @@ const App = observer(() => {
           </Pressable>
         </View>
         <Board cards={game.cards} />
-        {game.isCompleted && <Text style={styles.text}>Congratulations!</Text>}
-      </ScrollView>
+      </View>
     </SafeAreaView>
   )
 })
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   row: {
     flexDirection: 'row',
   },
