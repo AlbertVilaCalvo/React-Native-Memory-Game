@@ -23,6 +23,7 @@ import { Board } from './src/component/Board'
 import { game } from './src/game/Game'
 import { observer } from 'mobx-react-lite'
 import { WinOverlay } from './src/component/WinOverlay'
+import { useIsPortrait } from './src/util/useIsPortrait'
 
 const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark'
@@ -31,23 +32,34 @@ const App = observer(() => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   }
 
+  const fontSize = useIsPortrait() ? 22 : 18
+  const textStyle = { fontSize }
+
   React.useEffect(() => {
     game.startGame()
   }, [])
 
   return (
-    <SafeAreaView style={[styles.container, backgroundStyle]}>
+    <SafeAreaView style={[styles.fullHeight, backgroundStyle]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <View style={styles.container}>
-        <WinOverlay show={game.isCompleted} onClose={() => game.startGame()} />
-        <View style={styles.row}>
-          <Text style={styles.text}>{game.moves} moves</Text>
-          <Text style={styles.text}>{game.timer.seconds} seconds</Text>
+      <WinOverlay show={game.isCompleted} onClose={() => game.startGame()} />
+      <View style={styles.fullHeight}>
+        <View style={[styles.row]}>
+          <Text style={[styles.text, textStyle]}>Memory Game</Text>
           <Pressable
             onPress={() => {
-              game.startGame()
+              // Show modal
             }}>
-            <Text style={styles.text}>Restart</Text>
+            <Text style={[styles.text, textStyle]}>Info</Text>
+          </Pressable>
+        </View>
+        <View style={[styles.row]}>
+          <Text style={[styles.text, textStyle]}>{game.moves} moves</Text>
+          <Text style={[styles.text, textStyle]}>
+            {game.timer.seconds} seconds
+          </Text>
+          <Pressable onPress={() => game.startGame()}>
+            <Text style={[styles.text, textStyle]}>Restart</Text>
           </Pressable>
         </View>
         <Board cards={game.cards} />
@@ -57,17 +69,21 @@ const App = observer(() => {
 })
 
 const styles = StyleSheet.create({
-  container: {
+  fullHeight: {
     flex: 1,
+  },
+  centerVertical: {
+    justifyContent: 'center',
   },
   row: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   text: {
     fontSize: 22,
     fontWeight: '600',
     marginHorizontal: 16,
-    marginVertical: 16,
+    marginBottom: 16,
   },
 })
 
