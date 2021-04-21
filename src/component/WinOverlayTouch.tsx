@@ -5,7 +5,6 @@ import {
   GestureResponderEvent,
   PanResponder,
   PanResponderGestureState,
-  Pressable,
   StyleSheet,
   Text,
   useWindowDimensions,
@@ -14,11 +13,10 @@ import {
 import { Color } from '../style/Color'
 
 interface Props {
-  show: boolean
   onClose: () => void
 }
 
-export function WinOverlayTouch({ show, onClose }: Props) {
+export function WinOverlayTouch({ onClose }: Props) {
   const { height: screenHeight } = useWindowDimensions()
 
   const animatedBottomRef = React.useRef(new Animated.Value(screenHeight))
@@ -70,7 +68,15 @@ export function WinOverlayTouch({ show, onClose }: Props) {
         //   gestureState.vy,
         // )
         if (gestureState.dy < -180 || Math.abs(gestureState.vy) > 0.5) {
-          onClose()
+          // Hide animation
+          Animated.timing(animatedBottomRef.current, {
+            toValue: screenHeight,
+            duration: 300,
+            easing: Easing.linear,
+            useNativeDriver: false,
+          }).start(() => {
+            onClose()
+          })
         } else {
           animatedBottomRef.current.flattenOffset()
           // Move down back to the bottom
@@ -86,23 +92,13 @@ export function WinOverlayTouch({ show, onClose }: Props) {
   ).current
 
   React.useEffect(() => {
-    if (show) {
-      Animated.timing(animatedBottomRef.current, {
-        toValue: 0,
-        duration: 1000,
-        easing: Easing.cubic,
-        useNativeDriver: false, // 'top' is not supported by native animated module
-      }).start()
-    } else {
-      // hide
-      Animated.timing(animatedBottomRef.current, {
-        toValue: screenHeight,
-        duration: 300,
-        easing: Easing.linear,
-        useNativeDriver: false,
-      }).start()
-    }
-  }, [show, screenHeight])
+    Animated.timing(animatedBottomRef.current, {
+      toValue: 0,
+      duration: 800,
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: false, // 'top' is not supported by native animated module
+    }).start()
+  }, [screenHeight])
 
   const bottom = animatedBottomRef.current
   // console.log('bottom', bottom)
@@ -112,9 +108,6 @@ export function WinOverlayTouch({ show, onClose }: Props) {
       <Text style={styles.title}>Congratulations! You won!</Text>
       <Text style={styles.text}>With X moves and X seconds.</Text>
       <Text style={styles.text}>Woooooo!</Text>
-      <Pressable style={styles.button} onPress={() => onClose()}>
-        <Text style={styles.buttonText}>Play again!</Text>
-      </Pressable>
       <View {...panResponder.panHandlers} style={styles.moveUp}>
         <Text>Move up</Text>
       </View>
@@ -124,7 +117,7 @@ export function WinOverlayTouch({ show, onClose }: Props) {
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
     padding: 10,
     zIndex: 1,
     position: 'absolute',
@@ -165,5 +158,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Color.red,
     borderRadius: 50,
+    marginTop: 50,
   },
 })

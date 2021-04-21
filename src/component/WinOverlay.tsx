@@ -58,7 +58,7 @@ export function WinOverlay({ show, onClose }: Props) {
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
     padding: 10,
     zIndex: 1,
     position: 'absolute',
