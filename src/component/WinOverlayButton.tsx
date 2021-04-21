@@ -12,11 +12,16 @@ import { Color } from '../style/Color'
 // Inspired by https://github.com/warlyware/react-native-cookbook/blob/master/chapter-6/notification-animation/Notification/index.js
 
 interface Props {
+  /** Whether to show or hide the overlay.  */
   show: boolean
-  onClose: () => void
+  /** Invoked when the 'Play again!' button is pressed. */
+  onPlayAgainPress: () => void
 }
 
-export function WinOverlayButton({ show, onClose }: Props) {
+/**
+ * Has a 'Play again!' button that invokes `onPlayAgainPress` when pressed.
+ */
+export function WinOverlayButton({ show, onPlayAgainPress }: Props) {
   const { height: screenHeight } = useWindowDimensions()
 
   const animatedValue = React.useRef(new Animated.Value(0))
@@ -49,7 +54,7 @@ export function WinOverlayButton({ show, onClose }: Props) {
       <Text style={styles.title}>Congratulations! You won!</Text>
       <Text style={styles.text}>With X moves and X seconds.</Text>
       <Text style={styles.text}>Woooooo!</Text>
-      <Pressable style={styles.button} onPress={() => onClose()}>
+      <Pressable style={styles.button} onPress={() => onPlayAgainPress()}>
         <Text style={styles.buttonText}>Play again!</Text>
       </Pressable>
     </Animated.View>

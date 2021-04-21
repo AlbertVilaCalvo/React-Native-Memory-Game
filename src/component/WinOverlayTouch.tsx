@@ -16,9 +16,14 @@ import { Game } from '../game/Game'
 
 interface Props {
   game: Game
+  /** Invoked when the user swipes up and the overlay is completely hidden. */
   onClose: () => void
 }
 
+/**
+ * It immediately, automatically shows when rendered. Then you swipe up to close
+ * it, which invokes `onClose`.
+ */
 export const WinOverlayTouch = observer(({ game, onClose }: Props) => {
   const { height: screenHeight } = useWindowDimensions()
 
