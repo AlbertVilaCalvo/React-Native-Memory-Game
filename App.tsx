@@ -10,6 +10,7 @@
 
 import React from 'react'
 import {
+  Modal,
   Pressable,
   SafeAreaView,
   StatusBar,
@@ -24,9 +25,12 @@ import { game } from './src/game/Game'
 import { observer } from 'mobx-react-lite'
 import { WinOverlayTouch } from './src/component/WinOverlayTouch'
 import { useIsPortrait } from './src/util/useIsPortrait'
+import { Color } from './src/style/Color'
+import { InfoModal } from './src/component/InfoModal'
 
 const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark'
+  const [showInfoModal, setShowInfoModal] = React.useState(false)
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -42,22 +46,21 @@ const App = observer(() => {
   return (
     <SafeAreaView style={[styles.fullHeight, backgroundStyle]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      {game.isCompleted && (
-        <WinOverlayTouch
-          game={game}
-          onClose={() => {
-            game.startGame()
-          }}
-        />
-      )}
+
       <View style={styles.fullHeight}>
         <View style={[styles.row]}>
           <Text style={[styles.text, textStyle]}>Memory Game</Text>
           <Pressable
+            style={({ pressed }) => [
+              styles.infoPressable,
+              {
+                backgroundColor: pressed ? Color.teal : 'transparent',
+              },
+            ]}
             onPress={() => {
-              // Show modal
+              setShowInfoModal(true)
             }}>
-            <Text style={[styles.text, textStyle]}>Info</Text>
+            <Text style={[styles.infoText, textStyle]}>i</Text>
           </Pressable>
         </View>
         <View style={[styles.row]}>
@@ -71,6 +74,17 @@ const App = observer(() => {
         </View>
         <Board cards={game.cards} />
       </View>
+
+      {game.isCompleted && (
+        <WinOverlayTouch
+          game={game}
+          onClose={() => {
+            game.startGame()
+          }}
+        />
+      )}
+
+      {showInfoModal && <InfoModal onClose={() => setShowInfoModal(false)} />}
     </SafeAreaView>
   )
 })
@@ -87,10 +101,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   text: {
-    fontSize: 22,
     fontWeight: '600',
     marginHorizontal: 16,
     marginBottom: 16,
+  },
+  infoPressable: {
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 35,
+    height: 35,
+    borderRadius: 25,
+    borderColor: Color.teal,
+  },
+  infoText: {
+    fontWeight: '600',
   },
 })
 
