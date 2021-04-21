@@ -13,8 +13,6 @@ import {
 } from 'react-native'
 import { Color } from '../style/Color'
 
-// Inspired by https://github.com/warlyware/react-native-cookbook/blob/master/chapter-6/notification-animation/Notification/index.js
-
 interface Props {
   show: boolean
   onClose: () => void
@@ -34,10 +32,11 @@ export function WinOverlayTouch({ show, onClose }: Props) {
       onMoveShouldSetPanResponderCapture: () => true,
 
       onPanResponderGrant: (
-        event: GestureResponderEvent,
-        gestureState: PanResponderGestureState,
+        _event: GestureResponderEvent,
+        _gestureState: PanResponderGestureState,
       ) => {
         // console.log('_value', animatedBottomRef.current._value)
+        // @ts-ignore
         animatedBottomRef.current.setOffset(animatedBottomRef.current._value)
       },
 
@@ -45,31 +44,43 @@ export function WinOverlayTouch({ show, onClose }: Props) {
         event: GestureResponderEvent,
         gestureState: PanResponderGestureState,
       ) => {
-        // const translationY = gestureState.y0 - gestureState.moveY
-        // animatedBottomRef.current.setValue(translationY / screenHeight)
-        console.log(
-          'screenHeight',
-          screenHeight,
-          'gestureState.y0',
-          gestureState.y0,
-          'gestureState.dy',
-          gestureState.dy,
-          'gestureState.moveY',
-          gestureState.moveY,
-          'animatedBottomRef.current',
-          animatedBottomRef.current,
-        )
-        // animatedBottomRef.current.setValue(-gestureState.dy)
+        // console.log(
+        //   'screenHeight',
+        //   screenHeight,
+        //   'gestureState.y0',
+        //   gestureState.y0,
+        //   'gestureState.dy',
+        //   gestureState.dy,
+        //   'gestureState.moveY',
+        //   gestureState.moveY,
+        //   'animatedBottomRef.current',
+        //   animatedBottomRef.current,
+        // )
         animatedBottomRef.current.setValue(-gestureState.dy)
       },
 
-      // onPanResponderMove: Animated.event(
-      //   [null, { dy: animatedBottomRef.current }],
-      //   { useNativeDriver: false },
-      // ),
-
-      onPanResponderRelease: () => {
-        animatedBottomRef.current.flattenOffset()
+      onPanResponderRelease: (
+        event: GestureResponderEvent,
+        gestureState: PanResponderGestureState,
+      ) => {
+        // console.log(
+        //   'gestureState.dy',
+        //   gestureState.dy,
+        //   'gestureState.vy',
+        //   gestureState.vy,
+        // )
+        if (gestureState.dy < -180 || Math.abs(gestureState.vy) > 0.5) {
+          onClose()
+        } else {
+          animatedBottomRef.current.flattenOffset()
+          // Move down back to the bottom
+          Animated.timing(animatedBottomRef.current, {
+            toValue: 0,
+            duration: 100,
+            easing: Easing.cubic,
+            useNativeDriver: false,
+          }).start()
+        }
       },
     }),
   ).current
@@ -86,20 +97,15 @@ export function WinOverlayTouch({ show, onClose }: Props) {
       // hide
       Animated.timing(animatedBottomRef.current, {
         toValue: screenHeight,
-        duration: 800,
-        easing: Easing.cubic,
+        duration: 300,
+        easing: Easing.linear,
         useNativeDriver: false,
       }).start()
     }
   }, [show, screenHeight])
 
   const bottom = animatedBottomRef.current
-  // const bottom = animatedBottomRef.current.interpolate({
-  //   inputRange: [0, screenHeight],
-  //   outputRange: [0, screenHeight],
-  //   extrapolate: 'clamp',
-  // })
-  console.log('bottom', bottom)
+  // console.log('bottom', bottom)
 
   return (
     <Animated.View style={[styles.main, { height: screenHeight, bottom }]}>
