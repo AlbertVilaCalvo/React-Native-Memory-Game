@@ -11,12 +11,15 @@ import {
   View,
 } from 'react-native'
 import { Color } from '../style/Color'
+import { observer } from 'mobx-react-lite'
+import { Game } from '../game/Game'
 
 interface Props {
+  game: Game
   onClose: () => void
 }
 
-export function WinOverlayTouch({ onClose }: Props) {
+export const WinOverlayTouch = observer(({ game, onClose }: Props) => {
   const { height: screenHeight } = useWindowDimensions()
 
   const animatedBottomRef = React.useRef(new Animated.Value(screenHeight))
@@ -92,6 +95,7 @@ export function WinOverlayTouch({ onClose }: Props) {
   ).current
 
   React.useEffect(() => {
+    // Automatically show overlay when it's rendered
     Animated.timing(animatedBottomRef.current, {
       toValue: 0,
       duration: 800,
@@ -103,17 +107,18 @@ export function WinOverlayTouch({ onClose }: Props) {
   const bottom = animatedBottomRef.current
   // console.log('bottom', bottom)
 
+  const message = `With ${game.moves} moves and ${game.timer.seconds} seconds.`
   return (
     <Animated.View style={[styles.main, { height: screenHeight, bottom }]}>
       <Text style={styles.title}>Congratulations! You won!</Text>
-      <Text style={styles.text}>With X moves and X seconds.</Text>
+      <Text style={styles.text}>{message}</Text>
       <Text style={styles.text}>Woooooo!</Text>
       <View {...panResponder.panHandlers} style={styles.moveUp}>
         <Text>Move up</Text>
       </View>
     </Animated.View>
   )
-}
+})
 
 const styles = StyleSheet.create({
   main: {

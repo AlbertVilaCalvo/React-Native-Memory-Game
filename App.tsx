@@ -44,6 +44,7 @@ const App = observer(() => {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       {game.isCompleted && (
         <WinOverlayTouch
+          game={game}
           onClose={() => {
             game.startGame()
           }}
