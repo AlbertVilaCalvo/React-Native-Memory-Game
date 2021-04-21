@@ -16,7 +16,7 @@ interface Props {
   onClose: () => void
 }
 
-export function WinOverlay({ show, onClose }: Props) {
+export function WinOverlayButton({ show, onClose }: Props) {
   const { height: screenHeight } = useWindowDimensions()
 
   const animatedValue = React.useRef(new Animated.Value(0))
