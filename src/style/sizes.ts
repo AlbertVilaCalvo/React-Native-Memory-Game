@@ -3,7 +3,7 @@
 import { useWindowDimensions } from 'react-native'
 
 const COLUMN_COUNT = 4
-export const GAP_SIZE = 8
+export const GAP_SIZE = 16
 const VERTICAL_SPACE_ON_LANDSCAPE = 110
 
 export function useCardSize(): { boardSize: number; cardSize: number } {
@@ -14,6 +14,6 @@ export function useCardSize(): { boardSize: number; cardSize: number } {
   // each column, and at the lef and right of the whole board
   return {
     boardSize: size,
-    cardSize: (size - GAP_SIZE * 2 * (COLUMN_COUNT + 1)) / COLUMN_COUNT,
+    cardSize: (size - GAP_SIZE * (COLUMN_COUNT + 1)) / COLUMN_COUNT,
   }
 }

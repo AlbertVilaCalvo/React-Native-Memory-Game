@@ -86,11 +86,11 @@ function useNoMatchAnimation() {
 interface CardViewProps {
   card: Card
   cardSize: number
-  gapSize: number
+  margin: number
 }
 
 export const CardView = observer(
-  ({ card, cardSize, gapSize }: CardViewProps) => {
+  ({ card, cardSize, margin }: CardViewProps) => {
     const { runMatchAnimation, matchAnimationStyle } = useMatchAnimation()
     runMatchAnimation.value = card.isMatched
 
@@ -105,7 +105,7 @@ export const CardView = observer(
             {
               width: cardSize,
               height: cardSize,
-              margin: gapSize,
+              margin: margin,
               backgroundColor: card.backgroundColor,
             },
           ]}
