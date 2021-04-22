@@ -10,7 +10,6 @@
 
 import React from 'react'
 import {
-  Modal,
   Pressable,
   SafeAreaView,
   StatusBar,
@@ -21,6 +20,7 @@ import {
 } from 'react-native'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 import { Board } from './src/component/Board'
+import { GAP_SIZE, useCardSize } from './src/style/sizes'
 import { game } from './src/game/Game'
 import { observer } from 'mobx-react-lite'
 import { WinOverlayTouch } from './src/component/WinOverlayTouch'
@@ -30,14 +30,21 @@ import { InfoModal } from './src/component/InfoModal'
 
 const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark'
+  const isPortrait = useIsPortrait()
+  const { boardSize } = useCardSize()
+
   const [showInfoModal, setShowInfoModal] = React.useState(false)
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   }
 
-  const fontSize = useIsPortrait() ? 22 : 18
-  const textStyle = { fontSize }
+  const textStyleTop = { fontSize: isPortrait ? 22 : 18 }
+  const textStyleBottom = { fontSize: isPortrait ? 24 : 20 }
+  const row2Style = {
+    marginTop: isPortrait ? 12 : 3,
+    marginBottom: isPortrait ? 15 : 2,
+  }
 
   React.useEffect(() => {
     game.startGame()
@@ -47,32 +54,43 @@ const App = observer(() => {
     <SafeAreaView style={[styles.fullHeight, backgroundStyle]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
 
-      <View style={styles.fullHeight}>
-        <View style={[styles.row]}>
-          <Text style={[styles.text, textStyle]}>Memory Game</Text>
+      <View style={[styles.container]}>
+        <View style={styles.spaceTop} />
+        <View style={[styles.row1, { width: boardSize }]}>
+          <Text style={[styles.title, textStyleTop]}>Memory Game</Text>
+          <Pressable
+            style={({ pressed }) => [
+              styles.restartPressable,
+              {
+                backgroundColor: pressed ? Color.blue : Color.blueLight,
+              },
+            ]}
+            onPress={() => game.startGame()}>
+            <Text style={textStyleTop}>restart</Text>
+          </Pressable>
           <Pressable
             style={({ pressed }) => [
               styles.infoPressable,
               {
-                backgroundColor: pressed ? Color.teal : 'transparent',
+                backgroundColor: pressed ? Color.teal : Color.tealLight,
               },
             ]}
             onPress={() => {
               setShowInfoModal(true)
             }}>
-            <Text style={[styles.infoText, textStyle]}>i</Text>
+            <Text style={[styles.infoText, textStyleTop]}>i</Text>
           </Pressable>
         </View>
-        <View style={[styles.row]}>
-          <Text style={[styles.text, textStyle]}>{game.moves} moves</Text>
-          <Text style={[styles.text, textStyle]}>
-            {game.timer.seconds} seconds
+        <View style={[styles.row2, row2Style, { width: boardSize }]}>
+          <Text style={[styles.textBottom, textStyleBottom]}>
+            {game.moves} moves
           </Text>
-          <Pressable onPress={() => game.startGame()}>
-            <Text style={[styles.text, textStyle]}>Restart</Text>
-          </Pressable>
+          <Text style={[styles.textBottom, textStyleBottom]}>
+            {game.timer.seconds} s
+          </Text>
         </View>
         <Board cards={game.cards} />
+        <View style={styles.spaceBottom} />
       </View>
 
       {game.isCompleted && (
@@ -93,29 +111,50 @@ const styles = StyleSheet.create({
   fullHeight: {
     flex: 1,
   },
-  centerVertical: {
-    justifyContent: 'center',
+  container: {
+    flex: 1,
+    alignItems: 'center',
   },
-  row: {
+  spaceTop: {
+    flex: 1,
+  },
+  spaceBottom: {
+    flex: 2,
+  },
+  row1: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingHorizontal: GAP_SIZE * 2,
   },
-  text: {
-    fontWeight: '600',
-    marginHorizontal: 16,
-    marginBottom: 16,
+  row2: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    paddingHorizontal: GAP_SIZE * 2,
+  },
+  title: {
+    textAlignVertical: 'center',
+  },
+  textBottom: {
+    fontWeight: 'bold',
   },
   infoPressable: {
-    borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
     width: 35,
     height: 35,
+    borderWidth: 2,
     borderRadius: 25,
     borderColor: Color.teal,
   },
   infoText: {
     fontWeight: '600',
+  },
+  restartPressable: {
+    paddingHorizontal: 5,
+    paddingBottom: 5,
+    borderWidth: 2,
+    borderRadius: 8,
+    borderColor: Color.blue,
   },
 })
 
