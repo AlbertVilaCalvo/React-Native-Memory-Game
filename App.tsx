@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   restartPressable: {
+    justifyContent: 'center',
     paddingHorizontal: 5,
     paddingBottom: 5,
     borderWidth: 2,
