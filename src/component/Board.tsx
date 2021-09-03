@@ -27,5 +27,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     padding: GAP_SIZE / 2,
     borderRadius: 10,
+    backgroundColor: 'rgba(255,255,255,0.8)',
   },
 })
