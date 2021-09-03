@@ -121,6 +121,11 @@ export const WinOverlayTouch = observer(({ game, onClose }: Props) => {
       <View {...panResponder.panHandlers} style={styles.moveUp}>
         <Text>Move up</Text>
       </View>
+      {/* TODO check AnimatedLlibreManning staggered animation and replace above
+      <Animated.View {...panResponder.panHandlers} style={styles.moveUp}>
+        <Text>Move up</Text>
+      </Animated.View>
+       */}
     </Animated.View>
   )
 })
