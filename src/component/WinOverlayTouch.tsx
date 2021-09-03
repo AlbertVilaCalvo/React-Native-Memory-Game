@@ -117,7 +117,7 @@ export const WinOverlayTouch = observer(({ game, onClose }: Props) => {
     <Animated.View style={[styles.main, { height: screenHeight, bottom }]}>
       <Text style={styles.title}>Congratulations! You won!</Text>
       <Text style={styles.text}>{message}</Text>
-      <Text style={styles.text}>Woooooo!</Text>
+      <Text style={styles.text}>Wooohooo!</Text>
       <View {...panResponder.panHandlers} style={styles.moveUp}>
         <Text>Move up</Text>
       </View>
