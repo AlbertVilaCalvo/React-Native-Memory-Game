@@ -4,4 +4,10 @@ A memory game mobile app built with React Native, TypeScript and MobX for state 
 
 Animations and gestures are implemented with Animated, Reanimated2 and PanResponder.
 
-It's the React Native version of a game I already created for the Web using only JavaScript (ie with no frameworks like React). You can [play the Web version here](https://albert-javascript-udacity-memory-game.netlify.app) and also [check it's source code here](https://github.com/AlbertVilaCalvo/JavaScript-Udacity-Memory-Game).
+<a href="https://www.youtube.com/watch?v=2ueXk3jBcOY">⚡️ See it in action on YouTube! ⚡️</a>
+
+<a href="https://www.youtube.com/watch?v=2ueXk3jBcOY"><img src="screenshot.webp" alt="Screenshot of the memory game" title="See it in action on YouTube!" width="400px"></a>
+
+## Web version
+
+This app is the React Native version of a game I already created for the Web using only JavaScript (ie with no frameworks like React). You can [play the Web version online](https://albert-javascript-udacity-memory-game.netlify.app) and also [view it's source code](https://github.com/AlbertVilaCalvo/JavaScript-Udacity-Memory-Game).
