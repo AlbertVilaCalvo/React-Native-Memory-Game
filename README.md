@@ -2,7 +2,7 @@
 
 A memory game mobile app built with React Native, TypeScript and MobX for state management.
 
-Animations and gestures are implemented with Animated, Reanimated2 and PanResponder.
+Animations and gestures are implemented with Animated, Reanimated 3 and PanResponder.
 
 <a href="https://www.youtube.com/watch?v=2ueXk3jBcOY">⚡️ See it in action on YouTube! ⚡️</a>
 
