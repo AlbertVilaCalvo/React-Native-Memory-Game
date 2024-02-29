@@ -1,4 +1,4 @@
-package com.memorygame
+package com.albertvila.memorygame
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

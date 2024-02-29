@@ -1,4 +1,4 @@
-package com.memorygame
+package com.albertvila.memorygame
 
 import android.app.Application
 import com.facebook.react.PackageList
