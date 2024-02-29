@@ -10,7 +10,7 @@ Animations and gestures are implemented with Animated, Reanimated 3 and PanRespo
 
 ## Web version
 
-This app is the React Native version of a game I already created for the Web using only JavaScript - ie with no frameworks like React or Vue. You can [play the Web version online](https://albert-javascript-udacity-memory-game.netlify.app) and also [view it's source code](https://github.com/AlbertVilaCalvo/JavaScript-Udacity-Memory-Game).
+This app is the React Native version of a game I already created for the Web using only JavaScript - ie with no frameworks like React or Vue. You can [play the Web version online](https://albert-javascript-udacity-memory-game.netlify.app) and also [view its source code](https://github.com/AlbertVilaCalvo/JavaScript-Udacity-Memory-Game).
 
 ## Develop
 
@@ -26,3 +26,7 @@ npx react-native run-android
 # Run on iOS
 npx react-native run-ios
 ```
+
+## Privacy policy
+
+https://docs.google.com/document/d/e/2PACX-1vQLr1iT4rwvqgwk5oBHBf18JFiSHS7_zzGYbtahTrs3ujEr2vpuOKF2hPJlS9v7S5bcPLsGZFKxUUuK/pub
