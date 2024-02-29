@@ -68,7 +68,7 @@ const App = observer(() => {
               },
             ]}
             onPress={() => game.startGame()}>
-            <Text style={textStyleTop}>restart</Text>
+            <Text style={[styles.restartText, textStyleTop]}>restart</Text>
           </Pressable>
           <Pressable
             style={({ pressed }) => [
@@ -135,9 +135,11 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlignVertical: 'center',
+    color: Color.dark,
   },
   textBottom: {
     fontWeight: 'bold',
+    color: Color.dark,
   },
   infoPressable: {
     justifyContent: 'center',
@@ -150,6 +152,7 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontWeight: '600',
+    color: Color.dark,
   },
   restartPressable: {
     justifyContent: 'center',
@@ -158,6 +161,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 8,
     borderColor: Color.blue,
+  },
+  restartText: {
+    color: Color.dark,
   },
 })
 
