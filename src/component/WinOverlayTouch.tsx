@@ -119,7 +119,7 @@ export const WinOverlayTouch = observer(({ game, onClose }: Props) => {
       <Text style={styles.text}>{message}</Text>
       <Text style={styles.text}>Wooohooo!</Text>
       <View {...panResponder.panHandlers} style={styles.moveUp}>
-        <Text>Move up</Text>
+        <Text style={styles.buttonText}>Press and swipe up</Text>
       </View>
       {/* TODO check AnimatedLlibreManning staggered animation and replace above
       <Animated.View {...panResponder.panHandlers} style={styles.moveUp}>
@@ -164,7 +164,8 @@ const styles = StyleSheet.create({
   buttonText: {
     color: Color.white,
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 16,
+    textAlign: 'center',
   },
   moveUp: {
     width: 100,
