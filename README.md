@@ -30,3 +30,14 @@ npx react-native run-ios
 ## Privacy policy
 
 https://docs.google.com/document/d/e/2PACX-1vQLr1iT4rwvqgwk5oBHBf18JFiSHS7_zzGYbtahTrs3ujEr2vpuOKF2hPJlS9v7S5bcPLsGZFKxUUuK/pub
+
+## Publish Android app to Google Play
+
+Increment the `versionCode` and change `versionName` in `android/app/build.gradle`.
+
+Open the `android` folder in Android Studio and then do Build → Generate Signed App Bundle/APK...
+This generates the `app-release.aab` file in the `android/app/release` directory, which should
+be about 26 MB.
+
+Finally, go to the Play Console → Production → Create new release, upload the `.aab` file and
+follow the steps until it's live.
