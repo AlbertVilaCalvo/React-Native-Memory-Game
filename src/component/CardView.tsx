@@ -92,10 +92,14 @@ interface CardViewProps {
 export const CardView = observer(
   ({ card, cardSize, margin }: CardViewProps) => {
     const { runMatchAnimation, matchAnimationStyle } = useMatchAnimation()
-    runMatchAnimation.value = card.isMatched
+    React.useEffect(() => {
+      runMatchAnimation.value = card.isMatched
+    }, [card.isMatched, runMatchAnimation])
 
     const { runNoMatchAnimation, noMatchAnimationStyle } = useNoMatchAnimation()
-    runNoMatchAnimation.value = card.isNotMatched
+    React.useEffect(() => {
+      runNoMatchAnimation.value = card.isNotMatched
+    }, [card.isNotMatched, runNoMatchAnimation])
 
     return (
       <Animated.View style={[matchAnimationStyle, noMatchAnimationStyle]}>
