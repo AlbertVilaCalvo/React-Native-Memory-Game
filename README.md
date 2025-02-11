@@ -6,7 +6,7 @@ Animations and gestures are implemented with Animated, Reanimated 3 and PanRespo
 
 <a href="https://www.youtube.com/watch?v=2ueXk3jBcOY">⚡️ See it in action on YouTube! ⚡️</a>
 
-<a href="https://www.youtube.com/watch?v=2ueXk3jBcOY"><img src="screenshot.webp" alt="Screenshot of the memory game" title="See it in action on YouTube!" width="400px"></a>
+<a href="https://www.youtube.com/watch?v=2ueXk3jBcOY"><img src="assets/screenshot.webp" alt="Screenshot of the memory game" title="See it in action on YouTube!" width="400px"></a>
 
 ## Web version
 
