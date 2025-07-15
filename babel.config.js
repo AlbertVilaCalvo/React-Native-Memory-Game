@@ -1,7 +1,6 @@
 module.exports = {
   presets: ['module:@react-native/babel-preset'],
   plugins: [
-    // The Reanimated plugin has to be listed last.
-    'react-native-reanimated/plugin',
+    'react-native-reanimated/plugin', // Caution: has to be listed last
   ],
 }

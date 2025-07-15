@@ -16,7 +16,7 @@ This app is the React Native version of a game I already created for the Web usi
 
 ## Develop
 
-First install the dependencies with `yarn install`, then do:
+First install the dependencies with `npm install`, then do:
 
 ```bash
 # Start the bundler

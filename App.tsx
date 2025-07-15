@@ -15,7 +15,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
 import { Board } from './src/component/Board'
 import { GAP_SIZE, useCardSize } from './src/style/sizes'
 import { game } from './src/game/Game'
@@ -33,10 +32,6 @@ const App = observer(() => {
 
   const [showInfoModal, setShowInfoModal] = React.useState(false)
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  }
-
   const textStyleTop = { fontSize: isPortrait ? 22 : 18 }
   const textStyleBottom = { fontSize: isPortrait ? 24 : 20 }
   const row2Style = {
@@ -49,7 +44,7 @@ const App = observer(() => {
   }, [])
 
   return (
-    <SafeAreaView style={[styles.fullHeight, backgroundStyle]}>
+    <SafeAreaView style={styles.fullHeight}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
 
       <LinearGradient
