@@ -10,10 +10,6 @@ Animations and gestures are implemented with Animated, Reanimated 3 and PanRespo
 
 <a href="https://www.youtube.com/watch?v=2ueXk3jBcOY"><img src="assets/screenshot.webp" alt="Screenshot of the memory game" title="See it in action on YouTube!" width="400px"></a>
 
-## Web version
-
-This app is the React Native version of a game I already created for the Web using only JavaScript - ie with no frameworks like React or Vue. You can [play the Web version online](https://albert-javascript-udacity-memory-game.netlify.app) and also [view its source code](https://github.com/AlbertVilaCalvo/JavaScript-Udacity-Memory-Game).
-
 ## Develop
 
 First install the dependencies with `npm install`, then do:
@@ -32,6 +28,10 @@ npx react-native run-ios
 ## Privacy policy
 
 https://docs.google.com/document/d/e/2PACX-1vQLr1iT4rwvqgwk5oBHBf18JFiSHS7_zzGYbtahTrs3ujEr2vpuOKF2hPJlS9v7S5bcPLsGZFKxUUuK/pub
+
+## Web version
+
+This app is the React Native version of a game I already created for the Web using only JavaScript (ie with no frameworks like React or Vue). You can [play the Web version online here](https://albert-javascript-udacity-memory-game.netlify.app) and also [view its source code here](https://github.com/AlbertVilaCalvo/JavaScript-Udacity-Memory-Game).
 
 ## Publish Android app to Google Play
 
