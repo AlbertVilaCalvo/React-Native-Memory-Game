@@ -12,18 +12,16 @@ Animations and gestures are implemented with Animated, Reanimated 3 and PanRespo
 
 ## Develop
 
-First install the dependencies with `npm install`, then do:
+Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 
-```bash
-# Start the bundler
-npx react-native start
+First install the dependencies with `./manage.sh install`. Then do:
 
-# Run on Android
-npx react-native run-android
-
-# Run on iOS
-npx react-native run-ios
+```shell
+npm run android
+npm run ios
 ```
+
+To clean the project (ie uninstall the dependencies and delete the build folders), run `./manage.sh clean`.
 
 ## Privacy policy
 
