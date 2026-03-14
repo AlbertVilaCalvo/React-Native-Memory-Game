@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-COMMAND=$1
+COMMAND="${1:-}"
 
 usage() {
   echo "Usage: $0 <command>"
