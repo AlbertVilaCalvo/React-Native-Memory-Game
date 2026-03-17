@@ -14,3 +14,7 @@ gem 'bigdecimal'
 gem 'logger'
 gem 'benchmark'
 gem 'mutex_m'
+
+# Fix error "LoadError - cannot load such file -- kconv" when running "bundle exec pod install"
+# at the ios folder with ruby 3.4. See https://github.com/ckruse/CFPropertyList/issues/74
+gem 'nkf'
