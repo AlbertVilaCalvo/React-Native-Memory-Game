@@ -8,13 +8,13 @@
 import * as React from 'react'
 import {
   Pressable,
-  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
   View,
 } from 'react-native'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { Board } from './src/component/Board'
 import { GAP_SIZE, useCardSize } from './src/style/sizes'
 import { game } from './src/game/Game'
@@ -44,63 +44,65 @@ const App = observer(() => {
   }, [])
 
   return (
-    <SafeAreaView style={styles.fullHeight}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.fullHeight}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
 
-      <LinearGradient
-        colors={[Color.teal, Color.purple]}
-        useAngle={true}
-        angle={135}
-        style={[styles.container]}>
-        <View style={styles.spaceTop} />
-        <View style={[styles.row1, { width: boardSize }]}>
-          <Text style={[styles.title, textStyleTop]}>Memory Game</Text>
-          <Pressable
-            style={({ pressed }) => [
-              styles.restartPressable,
-              {
-                backgroundColor: pressed ? Color.blue : Color.blueLight,
-              },
-            ]}
-            onPress={() => game.startGame()}>
-            <Text style={[styles.restartText, textStyleTop]}>restart</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => [
-              styles.infoPressable,
-              {
-                backgroundColor: pressed ? Color.teal : Color.tealLight,
-              },
-            ]}
-            onPress={() => {
-              setShowInfoModal(true)
-            }}>
-            <Text style={[styles.infoText, textStyleTop]}>i</Text>
-          </Pressable>
-        </View>
-        <View style={[styles.row2, row2Style, { width: boardSize }]}>
-          <Text style={[styles.textBottom, textStyleBottom]}>
-            {game.moves} moves
-          </Text>
-          <Text style={[styles.textBottom, textStyleBottom]}>
-            {game.timer.seconds} s
-          </Text>
-        </View>
-        <Board cards={game.cards} />
-        <View style={styles.spaceBottom} />
-      </LinearGradient>
+        <LinearGradient
+          colors={[Color.teal, Color.purple]}
+          useAngle={true}
+          angle={135}
+          style={[styles.container]}>
+          <View style={styles.spaceTop} />
+          <View style={[styles.row1, { width: boardSize }]}>
+            <Text style={[styles.title, textStyleTop]}>Memory Game</Text>
+            <Pressable
+              style={({ pressed }) => [
+                styles.restartPressable,
+                {
+                  backgroundColor: pressed ? Color.blue : Color.blueLight,
+                },
+              ]}
+              onPress={() => game.startGame()}>
+              <Text style={[styles.restartText, textStyleTop]}>restart</Text>
+            </Pressable>
+            <Pressable
+              style={({ pressed }) => [
+                styles.infoPressable,
+                {
+                  backgroundColor: pressed ? Color.teal : Color.tealLight,
+                },
+              ]}
+              onPress={() => {
+                setShowInfoModal(true)
+              }}>
+              <Text style={[styles.infoText, textStyleTop]}>i</Text>
+            </Pressable>
+          </View>
+          <View style={[styles.row2, row2Style, { width: boardSize }]}>
+            <Text style={[styles.textBottom, textStyleBottom]}>
+              {game.moves} moves
+            </Text>
+            <Text style={[styles.textBottom, textStyleBottom]}>
+              {game.timer.seconds} s
+            </Text>
+          </View>
+          <Board cards={game.cards} />
+          <View style={styles.spaceBottom} />
+        </LinearGradient>
 
-      {game.isCompleted && (
-        <WinOverlayTouch
-          game={game}
-          onClose={() => {
-            game.startGame()
-          }}
-        />
-      )}
+        {game.isCompleted && (
+          <WinOverlayTouch
+            game={game}
+            onClose={() => {
+              game.startGame()
+            }}
+          />
+        )}
 
-      {showInfoModal && <InfoModal onClose={() => setShowInfoModal(false)} />}
-    </SafeAreaView>
+        {showInfoModal && <InfoModal onClose={() => setShowInfoModal(false)} />}
+      </SafeAreaView>
+    </SafeAreaProvider>
   )
 })
 
