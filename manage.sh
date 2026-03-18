@@ -28,15 +28,15 @@ log() {
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      -b|--before)
+      -b | --before)
         before=true
         shift
         ;;
-      -a|--after)
+      -a | --after)
         after=true
         shift
         ;;
-      -ba|-ab|--before-after)
+      -ba | -ab | --before-after)
         before=true
         after=true
         shift
@@ -103,8 +103,8 @@ clean_project() {
 }
 
 if [ -z "$COMMAND" ]; then
-    usage
-    exit 1
+  usage
+  exit 1
 fi
 
 case "$COMMAND" in
