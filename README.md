@@ -36,9 +36,14 @@ This app is the React Native version of a game I already created for the Web usi
 Increment the `versionCode` and change `versionName` in `android/app/build.gradle`.
 Also change the "version" in `package.json` and `package-lock.json`.
 
-Open the `android` folder in Android Studio and then do Build → Generate Signed App Bundle/APK...
-Choose Android App Bundle (not APK) and proceed.
-This generates the file `app-release.aab` in the `android/app/release` directory, which should be about 35 MB.
+Open the `android` folder in Android Studio and then do Build → Generate Signed App Bundle or APK...
+Choose Android App Bundle (not APK) and click Next.
+Set the upload Key store information and click Next.
+Optionally change the Destination Folder (e.g. Downloads). Select the `release` build variant and click Create.
+This generates the file `app-release.aab` in the `android/app/release` directory or at the directory you specified (inside a folder `release`).
+The `app-release.aab` file should be about 35-45 MB.
 
-Finally, go to the Play Console → Test and release → Production → Create new release, upload the `app-release.aab` file, fill the release notes and proceed until it's live.
-(Append `?hl=en` to the URL if the console is not in English.)
+Finally, go to the [Google Play Console](https://play.google.com/console) → Select the Memory Game app from the app list → Test and release → Production → Create new release.
+Upload the `app-release.aab` file and fill the release notes (you can "Copy from a previous release" and edit the text).
+Proceed until it's live with a 100% Roll-out percentage.
+Tip: append `?hl=en` to the URL if the console is not in English.
