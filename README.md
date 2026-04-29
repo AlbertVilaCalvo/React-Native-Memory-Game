@@ -1,6 +1,6 @@
 # React Native Memory Game
 
-<a href="https://play.google.com/store/apps/details?id=com.albertvila.memorygame"><img src="assets/GetItOnGooglePlay_Badge_Web_color_English.png" alt="Get it on Google Play" title="Download the app on Google Play" width="180px"></a>
+<a href="https://play.google.com/store/apps/details?id=com.albertvila.memorygame"><img src="assets/GetItOnGooglePlay_Badge_Web_color_English.png" alt="Get it on Google Play" title="Download the app on Google Play" width="180"></a>
 
 A memory game mobile app built with React Native, TypeScript and MobX for state management.
 
@@ -8,7 +8,7 @@ Animations and gestures are implemented with Animated, Reanimated and PanRespond
 
 <a href="https://www.youtube.com/watch?v=2ueXk3jBcOY">⚡️ See it in action on YouTube! ⚡️</a>
 
-<a href="https://www.youtube.com/watch?v=2ueXk3jBcOY"><img src="assets/screenshot.webp" alt="Screenshot of the memory game" title="See it in action on YouTube!" width="400px"></a>
+<a href="https://www.youtube.com/watch?v=2ueXk3jBcOY"><img src="assets/screenshot.webp" alt="Screenshot of the memory game" title="See it in action on YouTube!" width="400"></a>
 
 ## Develop
 
